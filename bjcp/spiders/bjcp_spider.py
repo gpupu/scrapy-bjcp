@@ -1,6 +1,9 @@
+from bjcp.items import BeerTitleItem
+
 __author__ = 'Gabriel'
 
 import scrapy
+
 
 # class DmozSpider(scrapy.Spider):
 #     name = "dmoz"
@@ -28,10 +31,10 @@ class BJCPSpider(scrapy.Spider):
 
     def parse(self, response):
         for sel in response.xpath("//ul[@class='features']/li"):
-            titulo = sel.xpath('a[@href]/text()').extract()
-            url = sel.xpath('a/@href').extract()
-            print titulo, url
+            beer_item = BeerTitleItem()
+            n = sel.xpath('a[@href]/text()').extract()
+            if n:
+                beer_item['name'] = n[0]
+                beer_item['url'] = sel.xpath('a/@href').extract()[0]
+                yield beer_item
 
-        # filename = response.url.split("/")[-2]
-        # with open(filename+".html", 'wb') as f:
-        #     f.write(response.body)

@@ -13,5 +13,9 @@ BOT_NAME = 'bjcp'
 SPIDER_MODULES = ['bjcp.spiders']
 NEWSPIDER_MODULE = 'bjcp.spiders'
 
+ITEM_PIPELINES = {
+    'bjcp.pipelines.CleaningTextPipeline': 300
+}
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'tutorial (+http://www.yourdomain.com)'
