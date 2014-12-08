@@ -14,7 +14,8 @@ SPIDER_MODULES = ['bjcp.spiders']
 NEWSPIDER_MODULE = 'bjcp.spiders'
 
 ITEM_PIPELINES = {
-    'bjcp.pipelines.CleaningTextPipeline': 300
+    'bjcp.pipelines.CleaningTextPipeline': 300,
+    'bjcp.pipelines.RetrieveCodePipeline': 400
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
