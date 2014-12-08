@@ -15,6 +15,7 @@ class TutorialPipeline(object):
 class CleaningTextPipeline(object):
     def process_item(self, item, spider):
         print "[DEBUG]: Pipeline CleaningText"
+
         if item['name']:
             translation_table = dict.fromkeys(map(ord, '\t\r\n'), None)
             item['name'] = item['name'].translate(translation_table)

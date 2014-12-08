@@ -17,8 +17,8 @@ class BeerTitleItem(scrapy.Item):
 
 
 class BeerStyleItem(scrapy.Item):
-    # code = scrapy.Field()
-    style = Field(output_processor=TakeFirst())
+    code = Field(output_processor=TakeFirst())
+    name = Field(output_processor=TakeFirst())
     desc = Field(output_processor=TakeFirst())
     # aroma = scrapy.Field()
     # apper = scrapy.Field()

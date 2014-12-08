@@ -2,7 +2,7 @@ from scrapy.contrib.linkextractors.lxmlhtml import LxmlLinkExtractor
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.contrib.spiders import Rule, CrawlSpider
 from scrapy.selector import HtmlXPathSelector
-from bjcp.items import BeerTitleItem
+from bjcp.items import BeerTitleItem, BeerStyleItem
 
 __author__ = 'Gabriel'
 
@@ -26,15 +26,13 @@ class BJCPSpider(CrawlSpider):
                 yield beer_item
 
     def parse_substyle(self, response):
-        resp = HtmlXPathSelector(response)
-        print "Respuesta del subestilo: "
-        yield resp
-        pass
-        #titles = hxs.select('//span[@class="pl"]')
-        items = []
-        # for titles in titles:
-        #     item = CraigslistSampleItem()
-        #     item ["title"] = titles.select("a/text()").extract()
-        #     item ["link"] = titles.select("a/@href").extract()
-        #     items.append(item)
-
+        # filename = response.url.split("/")[-1] + ".html"
+        # with open('.\\files\\'+filename, 'w') as f:
+        #     f.write(response.body)
+        for sel in response.xpath('//div[@class="inner"]/h2'):
+            if sel:
+                substyle = BeerStyleItem()
+                print "error1"
+                substyle['name'] = sel.extract()
+                print "error2"
+                yield substyle
