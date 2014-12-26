@@ -29,10 +29,31 @@ class BJCPSpider(CrawlSpider):
         # filename = response.url.split("/")[-1] + ".html"
         # with open('.\\files\\'+filename, 'w') as f:
         #     f.write(response.body)
-        for sel in response.xpath('//div[@class="inner"]/h2'):
+        for sel in response.xpath('//div[@class="inner"]/h2|//div[@class="inner"]/p|//div[@class="inner"]/table'):
             if sel:
                 substyle = BeerStyleItem()
                 print "error1"
-                substyle['name'] = sel.extract()
+                content = sel.extract()
+                content = self.clean_text(content)
+                if content:
+                    if content[:4] == '<h2>':
+                        print 'is a title'
+                        print content
+                    if content[:6] == '<p><b>':
+                        print 'is a description'
+                        print content
+                    if content[:6] == '<table':
+                        print 'is a table'
+                    #substyle['name'] = sel.extract()
                 print "error2"
-                yield substyle
+
+
+    def clean_text(self, text):
+        print "[DEBUG]: Clean text"
+
+        if text:
+            translation_table = dict.fromkeys(map(ord, '\t\r\n'), None)
+            text = text.translate(translation_table)
+            return text
+        else:
+            return None
