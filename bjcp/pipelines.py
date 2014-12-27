@@ -7,11 +7,6 @@
 from scrapy.exceptions import DropItem
 
 
-class TutorialPipeline(object):
-    def process_item(self, item, spider):
-        return item
-
-
 class CleaningTextPipeline(object):
     def process_item(self, item, spider):
         print "[DEBUG]: Pipeline CleaningText"
